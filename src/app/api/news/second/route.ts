@@ -1,3 +1,4 @@
+import { crawl } from "@/utils/crawl";
 import { endpoints } from "@/utils/endpoints";
 import { get } from "@/utils/fetcher";
 import { Item } from "@/utils/types";
@@ -5,18 +6,16 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const ids: number[] = await get<number[]>(endpoints.NEW_STORIES);
-        const slicedIds: number[] = ids.slice(0, 30);
-        const processIds = async (id: number) => await get<Item>(endpoints.STORY(id));
-        const hackerNewsItems: Item[] = await Promise.all(slicedIds.map(processIds));
+        const items = await crawl(endpoints.WEB_STORIES);
+        const usefullItems = items.slice(0, 30);
 
-        const lessOrEqualToFive: Item[] = hackerNewsItems.filter(e => e
+        const lessOrEqualToFive: Item[] = usefullItems.filter(e => e
             .title
             .replace(/[^\w\s]/gm, "")
             .replace(/\s+/g, " ")
             .split(/\s+/g)
             .length >= 5);
-        const orderedByPoints: Item[] = lessOrEqualToFive.sort((a, b) => a.score - b.score);
+        const orderedByPoints: Item[] = lessOrEqualToFive.sort((a, b) => a.points - b.points);
 
         return NextResponse.json(orderedByPoints, { status: 200 });
     } catch (error) {

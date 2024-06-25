@@ -77,7 +77,7 @@ export default function Home() {
 
   const listHackerComments = useMemo(() => data.map(e => (
     <Grid
-      key={e.id}
+      key={e.number}
       w='100%'
       gutter={rem(8)}
       className={classes.item}>
@@ -89,9 +89,9 @@ export default function Home() {
       <Grid.Col span={3}>
         <Flex
           direction='column'>
-          <Text>{e.id}</Text>
-          <Text>{e.score}</Text>
-          <Text>{e.kids?.length || 0}</Text>
+          <Text>Rank: {e.number}</Text>
+          <Text>Points: {e.points}</Text>
+          <Text>Comments: {e.comments}</Text>
         </Flex>
       </Grid.Col>
     </Grid>

@@ -7,6 +7,7 @@ export type FetcherHTTPMethod = "GET" | "POST" | "PATCH" | "PUT" | "DELETE"
 export interface FetcherConfiguration<T> extends Omit<RequestInit, 'method' | 'body'> {
     method: FetcherHTTPMethod;
     body?: T;
+    responseType?: 'json' | 'text'
 }
 
 const fetchConfigurationObject = ({
@@ -26,7 +27,7 @@ const fetchConfigurationObject = ({
     ...customInit
 })
 
-export const fetcher = async <T, R>(url: string, { body, responseType = 'json', ...options }: FetcherConfiguration<T> & { responseType?: 'json' | 'text' }): Promise<R> => {
+export const fetcher = async <T, R>(url: string, { body, responseType = 'json', ...options }: FetcherConfiguration<T>): Promise<R> => {
     try {
         const configurationInit = fetchConfigurationObject({ ...options, body: body ? JSON.stringify(body) : undefined });
         const response = await fetch(url, { ...configurationInit });

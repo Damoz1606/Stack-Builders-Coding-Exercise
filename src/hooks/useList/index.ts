@@ -25,7 +25,6 @@ export const useList = <T extends object>(initialValues: T[]): [data: T[], handl
         });
     }, []);
 
-
     const update = useCallback((key: keyof T, value: any, newValue: Partial<T>) => {
         setValues(prevValues => {
             const index = prevValues.findIndex(e => e[key] === value);

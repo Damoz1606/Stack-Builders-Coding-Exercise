@@ -26,15 +26,15 @@ const fetchConfigurationObject = ({
     ...customInit
 })
 
-export const fetcher = async <T, R>(url: string, { body, ...options }: FetcherConfiguration<T>): Promise<R> => {
+export const fetcher = async <T, R>(url: string, { body, responseType = 'json', ...options }: FetcherConfiguration<T> & { responseType?: 'json' | 'text' }): Promise<R> => {
     try {
         const configurationInit = fetchConfigurationObject({ ...options, body: body ? JSON.stringify(body) : undefined });
         const response = await fetch(url, { ...configurationInit });
-        const json = await response.json();
+        const data = responseType === 'json' ? await response.json() : await response.text();
         if (!response.ok) {
-            throw new FetchError(response, `Failed to ${options.method}:${url}`, json);
+            throw new FetchError(response, `Failed to ${options.method}:${url}`, data);
         }
-        return json;
+        return data;
     } catch (error) {
         throw error;
     }

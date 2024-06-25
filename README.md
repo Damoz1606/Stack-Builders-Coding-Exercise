@@ -16,21 +16,33 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API
+Here you can find two APIs that manage the given instructions.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Open [http://localhost:3000/api/news/first](http://localhost:3000/api/news/first) with your browser, this will open an array of stories that fits the given instruction: 
+- `Filter all previous entries with more than five words in the title ordered by the number of comments first.`
 
-## Learn More
+Open [http://localhost:3000/api/news/second](http://localhost:3000/api/news/second) with your browser, this will open an array of stories that fits the given instruction: 
+- `Filter all previous entries with less than or equal to five words in the title ordered by points.`
 
-To learn more about Next.js, take a look at the following resources:
+## Application
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000) with your browser, this will shows an screen that will load the data from the API. The application have two buttons:
+- First option
+- Second option
+Each button have a tooltip that describe its purpose.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### Hooks
+#### useFetch
+This custom hook works in the client side, will give a layer to use the fetch api without problem, givin the posibility to manage responses and errors as states.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### useList
+This custom hook works in the client side, will help to manage list, by providing methods that allows to override data, update an item by a given key, append items, or remove data by a given key.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## External libraries
+### Mantine UI
+Used for the UI to increase the develop of the frontend
+### cheerios
+Used for crawing the web of [https://news.ycombinator.com/news](https://news.ycombinator.com/news)

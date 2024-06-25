@@ -45,23 +45,3 @@ export interface GetFetcherConfiguration extends Omit<FetcherConfiguration<any>,
 export const get = <R>(url: string, options?: GetFetcherConfiguration): Promise<R> => {
     return fetcher<any, R>(url, { method: 'GET', ...options });
 }
-
-export interface PostFetcherConfiguration<T> extends Omit<FetcherConfiguration<T>, 'method'> { }
-export const post = <T, R>(url: string, options?: PostFetcherConfiguration<T>): Promise<R> => {
-    return fetcher<T, R>(url, { method: 'POST', ...options });
-}
-
-export interface PatchFetcherConfiguration<T> extends Omit<FetcherConfiguration<T>, 'method'> { }
-export const patch = <T, R>(url: string, options?: PatchFetcherConfiguration<T>): Promise<R> => {
-    return fetcher<T, R>(url, { method: 'PATCH', ...options });
-}
-
-export interface PutFetcherConfiguration<T> extends Omit<FetcherConfiguration<T>, 'method'> { }
-export const put = <T, R>(url: string, options?: PutFetcherConfiguration<T>): Promise<R> => {
-    return fetcher<T, R>(url, { method: 'PUT', ...options });
-}
-
-export interface DeleteFetcherConfiguration<T> extends Omit<FetcherConfiguration<T>, 'method' | 'body'> { }
-export const del = <T, R>(url: string, options?: DeleteFetcherConfiguration<T>): Promise<R> => {
-    return fetcher<T, R>(url, { method: 'DELETE', ...options });
-}

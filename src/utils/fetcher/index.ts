@@ -1,3 +1,5 @@
+'use server'
+
 import { FetchError } from "../error/fetch.error";
 
 export type FetcherHTTPMethod = "GET" | "POST" | "PATCH" | "PUT" | "DELETE"

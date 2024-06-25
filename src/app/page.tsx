@@ -5,7 +5,7 @@ import classes from "./page.module.css";
 import { Item } from "@/utils/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useList } from "@/hooks/useList";
-import { ActionIcon, Box, Flex, FloatingIndicator, Grid, LoadingOverlay, rem, ScrollArea, ScrollAreaAutosize, SimpleGrid, Text, Tooltip, UnstyledButton } from "@mantine/core";
+import { ActionIcon, Box, Flex, FloatingIndicator, Grid, LoadingOverlay, rem, ScrollArea, Text, Tooltip, UnstyledButton } from "@mantine/core";
 import { IconReload } from "@tabler/icons-react";
 import { notifications } from "@mantine/notifications";
 

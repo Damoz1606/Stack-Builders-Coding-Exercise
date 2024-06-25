@@ -7,6 +7,11 @@ export type ListHandler<T> = {
     override: (data: T[]) => void;
 }
 
+/**
+ * Focused on the manipulation of datasets for the frontend
+ * @param initialValues 
+ * @returns 
+ */
 export const useList = <T extends object>(initialValues: T[]): [data: T[], handlers: ListHandler<T>] => {
     const [values, setValues] = useState<T[]>(initialValues);
 

@@ -27,6 +27,13 @@ const fetchConfigurationObject = ({
     ...customInit
 })
 
+
+/**
+ * Custom fetch that provides that encapsulates the fetch API functionality in order to improve it
+ * @param url 
+ * @param param1 
+ * @returns 
+ */
 export const fetcher = async <T, R>(url: string, { body, responseType = 'json', ...options }: FetcherConfiguration<T>): Promise<R> => {
     try {
         const configurationInit = fetchConfigurationObject({ ...options, body: body ? JSON.stringify(body) : undefined });
@@ -42,6 +49,12 @@ export const fetcher = async <T, R>(url: string, { body, responseType = 'json', 
 }
 
 export interface GetFetcherConfiguration extends Omit<FetcherConfiguration<any>, 'method' | 'body'> { }
+/**
+ * Implemention of fetcher, only uses the GET method
+ * @param url 
+ * @param options 
+ * @returns 
+ */
 export const get = <R>(url: string, options?: GetFetcherConfiguration): Promise<R> => {
     return fetcher<any, R>(url, { method: 'GET', ...options });
 }

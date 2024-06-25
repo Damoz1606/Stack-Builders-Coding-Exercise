@@ -4,6 +4,11 @@ import * as cheerio from "cheerio";
 import { get } from "../fetcher";
 import { Item } from "../types";
 
+/**
+ * Analize the web and retrive the necessary elements
+ * @param url 
+ * @returns 
+ */
 export async function crawl(url: string): Promise<Item[]> {
     try {
         const data = await get<string>(url, { responseType: 'text' });

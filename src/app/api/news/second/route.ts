@@ -1,6 +1,5 @@
 import { crawl } from "@/utils/crawl";
 import { endpoints } from "@/utils/endpoints";
-import { get } from "@/utils/fetcher";
 import { Item } from "@/utils/types";
 import { NextResponse } from "next/server";
 

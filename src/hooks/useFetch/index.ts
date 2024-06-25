@@ -18,6 +18,13 @@ export type FetchResult<T> = {
     reset: () => void;
 }
 
+/**
+ * Manage the use of fetch API for the frontend, it provides and manage its own states
+ * @param url 
+ * @param method 
+ * @param options 
+ * @returns 
+ */
 export const useFetch = <T>(url: string, method: FetchHTTPMethod, options?: FetchHookOptions<T>) => {
     const { loadOnMount = true, ...customOptions } = options || {}
 

@@ -8,7 +8,7 @@ export interface Item {
     dead: boolean;
     parent: number;
     pool: number;
-    kids: number[];
+    kids?: number[];
     url: string;
     score: number;
     title: string;

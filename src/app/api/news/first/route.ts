@@ -5,10 +5,12 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const hackerNewsItems: Item[] = await get<Item[]>(endpoints.NEW_STORIES);
-        const hackerNewsEntries: Item[] = hackerNewsItems.slice(0, 30);
+        const ids: number[] = await get<number[]>(endpoints.NEW_STORIES);
+        const slicedIds: number[] = ids.slice(0, 30);
+        const processIds = async (id: number) => await get<Item>(endpoints.STORY(id));
+        const hackerNewsItems: Item[] = await Promise.all(slicedIds.map(processIds));
 
-        const orderedByComments: Item[] = hackerNewsEntries.sort((a, b) => a.kids.length - b.kids.length);
+        const orderedByComments: Item[] = hackerNewsItems.sort((a, b) => (a.kids?.length || 0) - (b.kids?.length || 0));
         const moreThanFiveWords: Item[] = orderedByComments.filter(e => e.title.length > 5);
 
         return NextResponse.json(moreThanFiveWords, { status: 200 });

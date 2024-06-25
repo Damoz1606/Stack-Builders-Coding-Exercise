@@ -5,10 +5,12 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const hackerNewsItems: Item[] = await get<Item[]>(endpoints.NEW_STORIES);
-        const hackerNewsEntries: Item[] = hackerNewsItems.slice(0, 30);
+        const ids: number[] = await get<number[]>(endpoints.NEW_STORIES);
+        const slicedIds: number[] = ids.slice(0, 30);
+        const processIds = async (id: number) => await get<Item>(endpoints.STORY(id));
+        const hackerNewsItems: Item[] = await Promise.all(slicedIds.map(processIds));
 
-        const lessOrEqualToFive: Item[] = hackerNewsEntries.filter(e => e
+        const lessOrEqualToFive: Item[] = hackerNewsItems.filter(e => e
             .title
             .replace(/[^\w\s]/gm, "")
             .replace(/\s+/g, " ")

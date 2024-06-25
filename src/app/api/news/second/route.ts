@@ -1,6 +1,7 @@
 import { endpoints } from "@/utils/endpoints";
 import { get } from "@/utils/fetcher";
 import { Item } from "@/utils/types";
+import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
@@ -15,8 +16,8 @@ export async function GET() {
             .length >= 5);
         const orderedByPoints: Item[] = lessOrEqualToFive.sort((a, b) => a.score - b.score);
 
-        return orderedByPoints;
+        return NextResponse.json(orderedByPoints, { status: 200 });
     } catch (error) {
-
+        console.error(error);
     }
 }
